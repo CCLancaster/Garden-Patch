@@ -1,6 +1,6 @@
-#TODO: Still need rendering of pages to happen for plant/:id, /plants and /search
-
-from flask import jsonify, redirect, requests
+# TD: Still need rendering of pages to happen for plant/:id, /plants and /search
+import requests
+from flask import jsonify, redirect
 from models import db, Plant
 from config import access_token
 
@@ -14,10 +14,10 @@ API_BASE_URL = 'https://trefle.io/api/'
 def get_all_plants(name):
     full_api_url = f'{API_BASE_URL}?q={name}'
     result = requests.request('GET', full_api_url, headers=headers).json()
-    ## here's where we drill down in our response to get info to iterate through on the front end
+    # here's where we drill down in our response to get info to iterate through on the front end
 
 # Index - DB call
-def get_all_fav_plants(user_id)
+def get_all_fav_plants(user_id):
     all_plants = Plant.query.filter_by(user_id=user_id).all()
     if len(all_plants) > 0:
         results = [plant.as_dict() for plant in all_plants]
@@ -28,9 +28,9 @@ def get_all_fav_plants(user_id)
 def get_plant(id):
     full_api_url = f'{API_BASE_URL}plants/{id}'
     result = requests.request('GET', full_api_url, headers=headers).json()
-    # TODO:
-    ## here's where we drill down in our response to get data
-    ## return render of template for this page
+    # TD:
+    # here's where we drill down in our response to get data
+    # return render of template for this page
 
 
 # Create (this will add it to the plant db for the specific user)
@@ -42,7 +42,7 @@ def create_plant(user_id, name, s_name, t_id, p_type, style, water_min, shade_to
 
 # Update...realizing this may not be needed, as info is coming from API call and there is no edit plant option, just delete or add(create) to db
 # def update_plant(id):
-#     #may want to update id here to t_id (which is the global id for the plant in question vs the id created in my db)
+#     # may want to update id here to t_id (which is the global id for the plant in question vs the id created in my db)
 #     plant = Plant.query.get(id)
 #     if plant:
 #         plant.name = name or plant.s_name

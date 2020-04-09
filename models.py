@@ -1,10 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-​
+from passlib.apps import custom_app_context as pwd_context
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask_cors import CORS
+
+
 app=Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/flasql'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/garden_patch'
+app.config['SECRET_KEY'] = 'somethinglkjelsesdfentirely'
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+# '/*' this is where you tell it what routes you want to be auth locked
+cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -23,7 +33,20 @@ class User(db.Model):
         return f'User(id={self.id}, first_name={self.first_name}", last_name="{self.last_name}", email="{self.email}", password="{self.password}", zone="{self.zone}")'
     
     def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        user_dict = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        del user_dict['password']
+        return user_dict
+    
+    def set_password(self, password):
+        self.password = pwd_context.encrypt(password)
+    
+    def verify_password(self, typed_password):
+        return pwd_context.verify(typed_password, self.password)
+
+    # expiration time is in seconds (vs js's milliseconds)
+    def generate_token(self, expiration=60*10):
+        s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
+        return s.dumps({'id': self.id})
 
 
 class Plant(db.Model):

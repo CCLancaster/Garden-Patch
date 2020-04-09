@@ -1,11 +1,7 @@
-#TODO: Auth/login and signup adds
+# TD: Auth/login and signup adds
 
 from flask import jsonify, redirect
 from models import db, User
-
-# Index (optional?)
-# def get_all_users():
-#     all_users = User.query.all()
 
 
 # Show (will need to test where I am getting my id from)
@@ -19,12 +15,20 @@ def get_user(id):
 
 
 # Create
-def create_user(first_name, last_name, email, password)
-    new_user = User(first_name=first_name, last_name=last_name, email=email, password=password)
+def create_user(**form_args):
+    if not form_args['first_name'] or not form_args['last_name'] or not form_args['email'] or not form_args['password']:
+        raise Exception("Name, email, and password are required fields")
+    if User.query.filter_by(email=form_args['email']).first() is not None:
+        raise Exception('There is already a user with this email')
+
+    new_user = User(**form_args)
+    new_user.set_password(form_args['password'])
     db.session.add(new_user)
     db.session.commit()
-    return jsonify(new_user.as_dict())
-    #return redirect to profile page
+    # authorize the user
+    token = new_user.generate_token()
+    return jsonify(user=new_user.as_dict(), token=token.decode('ascii'), status_code=201)
+    # will not return redirect to profile page as the front end needs to do this
 
 # Update 
 def update_user_zone(id, zone):
@@ -36,7 +40,7 @@ def update_user_zone(id, zone):
     else:
         raise Exception('No User at id {}'.format(id))
 
-##NOTE: while users have plants, adding plants and deleting plants that tie to a specific user is done in plant_crud.py
+# Note: while users have plants, adding plants and deleting plants that tie to a specific user is done in plant_crud.py
 
 # Destroy (optional)
 def destroy_user(id):
