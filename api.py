@@ -37,6 +37,7 @@ def verify_token(token):
 
 @app.route('/auth/signup', methods=['POST'])
 def signup():
+    print(**request.json)
     return create_user(**request.json)
 
 

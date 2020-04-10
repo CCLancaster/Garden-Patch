@@ -19,8 +19,8 @@ function Signup(props) {
         fetch(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, {
         method: 'POST',
         body: JSON.stringify({
-            firstname,
-            lastname,
+            first_name: firstname,
+            last_name: lastname,
             email,
             password
         }),

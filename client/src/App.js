@@ -22,8 +22,7 @@ const updateUser = newUserDeets => {
   return (
     <Router>
       <div className="app">
-        {/* <Nav updateUser={updateUser} user={user}/> */}
-        {/* <Header logout={() => setUserToken(null)} user={user} /> */}
+        <Nav updateUser={updateUser} user={user} token={token} />
         <main>
           <Content setUserToken={setUserToken} user={user} token={token} updateUser={updateUser} />
         </main>
