@@ -8,6 +8,7 @@ import Content from './Content'
 function App() {
   // Declare state variables
   let [user, setUser] = useState(null)
+  // let [token, setToken] = useState(null)
 
 const setUserToken = (responseData) => {
   setUser({user: responseData.user, token: responseData.token})
@@ -22,8 +23,9 @@ const updateUser = newUserDeets => {
     <Router>
       <div className="app">
         {/* <Nav updateUser={updateUser} user={user}/> */}
+        {/* <Header logout={() => setUserToken(null)} user={user} /> */}
         <main>
-          <Content setUserToken={setUserToken} user={user}/>
+          <Content setUserToken={setUserToken} user={user} token={token} updateUser={updateUser} />
         </main>
       </div>
     </Router>  
