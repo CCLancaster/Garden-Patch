@@ -1,0 +1,65 @@
+//TD: create a button to add this zone to the db
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+function Zone(props) {
+    //Declare and Initialize state variables
+    let [zipcode, setZipcode] = useState('')
+    let [zone, setZone] = useState({})
+    let [message, setMessage] = useState('')
+    
+    useEffect(() => {
+        setMessage("")
+    }, [zipcode, zone])
+
+    //event to handle the zipcode submit and trigger the API call
+    const handleZipSubmit = e => {
+        e.preventDefault()
+
+        //send zip code to the server
+        fetch(`${process.env.REACT_APP_SERVER_URL}/zone`, {
+            method: 'POST',
+            body: JSON.stringify({
+                zone: zipcode
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            }
+        }).then(response => {
+            if (!response.ok) {
+                console.log(response);
+                setMessage(`${response.status}: ${response.statusText}`);
+                return;
+            } else {
+                response.json().then(result => {
+                    console.log(result)
+                    setZone(result)
+                })
+            setShowZone(true)
+            }
+        })
+    }
+
+
+    return (
+        <div className="zone">
+            <h3>Find your zone</h3>
+            <p>USDA Hardiness Zones help gardeners and farmers alike identify which plants will thrive and survive in their specific geographic location based on average winter temperatures</p>
+            <h5>Enter your zip code below</h5>
+            <form method="POST" className="searchform" onSubmit={handleZipSubmit}>
+                <input type="text" name="search" id="search" onChange={e => setZipcode(e.target.value)} placeholder="Zipcode" />
+                <button type="submit">Search</button>
+            </form>
+            <div className={`zone ${showZone ? '' : 'hidden'}`}>
+                <h5>Your hardiness zone is {zone.zone}</h5>
+                <p>This means your average winter temperatures range from {zone.temperature_range}</p>
+            </div>
+
+        </div>
+
+
+    )
+
+
+}
