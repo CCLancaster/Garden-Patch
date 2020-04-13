@@ -49,7 +49,8 @@ function Signup(props) {
 
     return (
         <div className="signForm">
-            <h1>Sign Up Now</h1>
+            <h1>Lets Get Growing</h1>
+            <h3>Signup below:</h3>
             <form className="signup" method="POST" onSubmit={handleSubmit}>
                 
                 
@@ -57,7 +58,6 @@ function Signup(props) {
                 <input type="text" name="lastname" placeholder="Last Name" onChange={e => setLastname(e.target.value)} />
                 <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
                 <input type="password" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-                <input type="text" name="phoneNumber" placeholder="Phone Number" onChange={e => setPhone(e.target.value)} />
                
                 <button type="submit">Submit</button>
             </form>

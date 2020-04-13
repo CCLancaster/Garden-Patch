@@ -46,12 +46,12 @@ def create_plant(user_id):
     name = plant_info['common_name']
     s_name = plant_info['scientific_name']
     t_id = plant_info['id']
-    p_type = plant_info.get('main_species', {}).get('duration')
-    style = plant_info.get('main_species', {}).get('specifications', {}).get('growth_habit')
-    water_min = plant_info.get('main_species' {}).get('growth', {}).get('precipitation_minimum', {}).get('inches')
-    shade_tol = plant_info.get('main_species', {}).get('growth', {}).get('shade_tolerance')
-    drought_tol = plant_info.get('main_species', {}).get('growth', {}).get('drought_tolerance')
-    density_max = plant_info.get('main_species', {}).get('growth', {}).get('planting_density_maximum', {}).get('sqm')
+    p_type = plant_info['main_species']['duration']
+    style = plant_info['main_species']['specifications']['growth_habit']
+    water_min = plant_info['main_species']['growth']['precipitation_minimum']['inches']
+    shade_tol = plant_info['main_species']['growth']['shade_tolerance']
+    drought_tol = plant_info['main_species']['growth']['drought_tolerance']
+    density_max = plant_info['main_species']['growth']['planting_density_maximum']['sqm']
     img = plant_info['images'][0]['url']
     
     new_plant = Plant(user_id=user_id, name=name or None, s_name=s_name or None, t_id=t_id or None, p_type=p_type or None, style=style or None, water_min=water_min or None, shade_tol=shade_tol or None, drought_tol=drought_tol or None, density_max=density_max or None, size_max=size_max or None, img=img or None)

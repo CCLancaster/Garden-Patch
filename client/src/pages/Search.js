@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, Link } from 'react-router-dom'
+
 
 function Search(props) {
     // declare and initialize state variables
@@ -18,7 +18,7 @@ function Search(props) {
 
         // send search criteria to back-end
         fetch(`${process.env.REACT_APP_SERVER_URL}/search`, {
-            method = 'POST',
+            method: 'POST',
             body: JSON.stringify({
                 name: plantname
             }),
@@ -53,7 +53,7 @@ function Search(props) {
 
         //send plant id to back end for secondary api call and adding to plants table
         fetch(`${process.env.REACT_APP_SERVER_URL}/search/plants`, {
-            method = 'POST',
+            method: 'POST',
             body: JSON.stringify({ id }),
             headers: {
                 'Content-Type': 'application/json',

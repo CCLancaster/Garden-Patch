@@ -1,7 +1,6 @@
-# TD: Auth/login and signup adds
-
 from flask import jsonify, redirect
 from models import db, User
+
 
 
 # Show (will need to test where I am getting my id from)

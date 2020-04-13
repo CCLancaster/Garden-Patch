@@ -1,11 +1,13 @@
-from flask import Flask
+from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from passlib.apps import custom_app_context as pwd_context
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_cors import CORS
 
 
-app=Flask(__name__)
+app=Flask(__name__,
+    static_folder = './client/public',
+    template_folder='./client/src/pages')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/garden_patch'

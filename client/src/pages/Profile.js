@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
-// import { BrowserRouter as Router, Link, Route, NavLink, Redirect } from "react-router-dom"
-
+import { BrowserRouter as Router, Link, Route, NavLink, Redirect } from "react-router-dom"
+import Zone from './Zone';
+import Search from './Search';
+import Plants from './Plants';
+import Garden from './Garden';
 
 function Profile(props) {
 

@@ -1,14 +1,14 @@
-# TD: Auth/login and signup
 # TD: Routes = '/', '/profile'
 # TD: Renders = '/zone', '/search', '/plants', '/plants/:id' - see crud pages
 
 from models import app, User
-from flask import jsonify, request, g
+from flask import jsonify, request, g, render_template, url_for, json
 from crud.user_crud import get_user, create_user, destroy_user, update_user_zone
 from crud.plant_crud import get_all_plants, get_plant, create_plant, destroy_plant
 from crud.zone_crud import get_zone
 from flask_httpauth import HTTPTokenAuth
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
+
 
 auth = HTTPTokenAuth('Bearer')
 
@@ -62,30 +62,40 @@ def get_resource():
     return jsonify({ 'data': 'Hello, %s!' % g.user.name})
 
 # @app.route for gardenpatch homepage / 'GET' <-- to render only when logged out
+@app.route('/')
+def redirect():
+    return render_template('Signup.js')
+    
 
 # @app.route for /profile 'GET' <-- to render only when logged in 
-# @auth.login_required
+@app.route('/profile')
+@auth.login_required
+def get_profile():
+    return render_template('Profile.js')
 
 # @app.route for /zone 'GET' <-- to render page | 'POST' <-- post will trigger api call | 'PUT' <-- update user db with zone info
 @app.route('/zone', methods=['GET', 'POST', 'PUT'])
 def zone_get_post_put():
     if request.method == 'GET':
-        return jsonify({'data': 'You made it to the zone page %s' % g.user.name})
+        # return jsonify({'data': 'You made it to the zone page %s' % g.user.name})
+        return render_template('Zone.js')
     if request.method == 'POST':
         return get_zone(zip_code)
     if request.method == 'PUT':
         return update_user_zone(zone)
 
 
-# @app.route for /search 'GET' <-- to render page | 'POST' <-- trigger api call | 'PUT' <-- add to plants db (will need to double check this as a PUT route is for updating...what if you're creating/adding a plant to the db for the first time?)
+# @app.route for /search 'GET' <-- to render page | 'POST' <-- trigger api call 
 @app.route('/search', methods=['GET', 'POST'])
 def search_get_post():
     if request.method == 'GET':
-        return jsonify(f'You reached the search plants page')
+        # return jsonify(f'You reached the search plants page')
+        return render_template('Search.js')
     if request.method == 'POST':
         print(**request.json)
         return get_all_plants(**request.json)
 
+# @app.route /search/plants 'POST' <-- triggers second API all and saves plant to DB
 @app.route('/search/plants', methods=['POST'])
 def search_post():
     get_plant(**request.json)
@@ -96,7 +106,7 @@ def search_post():
 # @app.route for /plants 'GET' <-- to show plant list(get_all_plants)
 @app.route('/plants', methods=['GET'])
 def plants_index():
-    return get_all_plants()
+    return get_all_fav_plants(g.user.id)
 
 
 # @app.route for /plants/:id 'GET' <-- to show a specific plant | 'DELETE' <-- to remove plant from plant list (and db)

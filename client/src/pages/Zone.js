@@ -6,6 +6,7 @@ function Zone(props) {
     //Declare and Initialize state variables
     let [zipcode, setZipcode] = useState('')
     let [zone, setZone] = useState({})
+    let [showZone, setShowZone] = useState(false)
     let [message, setMessage] = useState('')
     
     useEffect(() => {
