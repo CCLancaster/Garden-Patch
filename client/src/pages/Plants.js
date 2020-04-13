@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 function Plants(props) {
-    let [plantList, setPlantlist] = useState([])
+    // let [plantList, setPlantlist] = useState([])
 
     const handlePlantDelete = (e, id) => {
         e.preventDefault()
@@ -29,7 +29,7 @@ function Plants(props) {
                 <div className="itemlist" key={`plantListItem-${i}`}>
                     <div className="apideetcontainer">
                         <div classname="boxes">
-                            <img src={plant.img} className="apiimg" />
+                            <img src={plant.img} className="apiimg" alt={plant.name}/>
                         </div>
                         <div className="boxes">
                             <p className="hidden">{plant.id}</p>

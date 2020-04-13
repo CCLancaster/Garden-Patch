@@ -46,8 +46,8 @@ function Zone(props) {
     return (
         <div className="zone">
             <h3>Find your zone</h3>
-            <div>
-                <img src="/Users/monty/SEI29/unit4/p4/garden-patch/client/public/usda_plant_hardiness_zones_map-smaller.png" className="usdaImage" />
+            <div className="zoneimg">
+                <img src="/Users/monty/SEI29/unit4/p4/garden-patch/client/public/usda_plant_hardiness_zones_map-smaller.png" className="usdaImage" alt="usda_plant_hardiness_zones"/>
             </div>
             <p>USDA Hardiness Zones help gardeners and farmers alike identify which plants will thrive and survive in their specific geographic location based on average winter temperatures</p>
             <h5>Enter your zip code below</h5>

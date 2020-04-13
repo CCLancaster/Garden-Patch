@@ -1,38 +1,132 @@
-.App {
-  text-align: center;
+/* --- global styling --- */
+.app {
+  font-family: 'Special Elite', cursive;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar {
+  line-height: 60px;
   display: flex;
+  justify-content: space-around;
+}
+
+li {
+  list-style: none;
+  display: inline;
+}
+
+a:hover {
+  color: green;
+}
+
+.logo {
+  height: 80px;
+}
+
+.links {
+  height: 50px;
+  font-size: 16px;
+  color: #016301;
+}
+
+.macDaddyContainer {
+  display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
-  align-items: center;
+
+
+}
+
+
+/* --- Login/Signup(aka Home) pages --- */
+
+
+.sprouts {
+  width: 100%;
+  height: 80%;
+}
+.signup {
+  position: relative;
+  margin-top: -50;
+}
+
+.login {
+  position: relative;
+  margin-top: -50;
+}
+
+.signUpForm {
+  text-align: center;
+  background-color:#ffffff;  
+  color: #000000;
+  height: 400px;
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
+  align-self: center;
+}
+
+.logbox {
+  display: flex;
+  width: 50%;
+  margin: -50% 25%;
+  border: 1px solid black;
+  border-radius: 10px;
+  position: absolute;
+}
+
+
+.logform {
+  background-color: #ffffff;
+  width: 50%;
+  height: 500px;   
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* --- Profile -- */
+
+.profile {
+  display: flex;
+  justify-content: space-around;
+  height: 750px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profileSquares {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  margin: 20px;
 }
+
+.square {
+  width: 75%;
+  height: 75%;
+}
+
+/* --- Zone --- */
+
+.zoneimg {
+  position: relative;
+  margin-top: -50;
+}
+
+.usdaImage {
+  height: 400px;
+  width: 600px;
+  border: 4px solid #000000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* --- Search --- */
+
+
+/* --- Plants & Plants_id--- */
+
+
+/* --- Garden --- */

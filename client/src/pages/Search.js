@@ -6,6 +6,7 @@ function Search(props) {
     let [plantname, setPlantname] = useState('')
     let [plantinfo, setPlantinfo] = useState([])
     let [favplant, setFavplant] = useState([])
+    let [showForms, setShowForms] = useState(false)
     let [message, setMessage] = useState('')
 
     useEffect(() => {
@@ -49,7 +50,7 @@ function Search(props) {
     // select plants, make secondary api call and push them into the plants table
     const handlePlantSubmit = (e, id) => {
         e.preventDefault()
-        setFavplant([...faveplant, id])
+        setFavplant([...favplant, id])
 
         //send plant id to back end for secondary api call and adding to plants table
         fetch(`${process.env.REACT_APP_SERVER_URL}/search/plants`, {

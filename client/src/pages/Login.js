@@ -44,20 +44,18 @@ function Login(props) {
     }
 
     return (
-        <div className="logimg">
-            <img src="#" className=""/>
-            <div className="login">
+        <div className="login">
+            <img src="/Users/monty/SEI29/unit4/p4/garden-patch/client/public/markus-spiske-vrbZVyX2k4I-unsplash.jpg" className="sprouts" alt="sprouts" />
+            <div className="logbox">
                 <div className="logform">
-                    <div>
-                        <h2>Login</h2>
-                        <form method="POST" onSubmit={handleSubmit}>
-                            <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                            <input type="password" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-                            <button type="submit">Submit</button>
-                        </form>
-                        <p>New user?
-                        <a href='/' className="red">Sign up here</a></p>
-                    </div>
+                    <h2>Login</h2>
+                    <form method="POST" onSubmit={handleSubmit}>
+                        <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                        <input type="password" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                        <button type="submit">Submit</button>
+                    </form>
+                    <p>New user?
+                    <a href='/'>Sign up here</a></p>
                 </div>
             </div>
         </div>

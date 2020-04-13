@@ -48,23 +48,24 @@ function Signup(props) {
     }
 
     return (
-        <div className="signForm">
-            <h1>Lets Get Growing</h1>
-            <h3>Signup below:</h3>
-            <form className="signup" method="POST" onSubmit={handleSubmit}>
+        <div className="signup">
+            <img src="/Users/monty/SEI29/unit4/p4/garden-patch/client/public/markus-spiske-vrbZVyX2k4I-unsplash.jpg" className="sprouts" alt="sprouts" />
+            <div className="signUpForm">
+                <h2>Lets Get Growing</h2>
+                <h3>Signup below:</h3>
+                <form method="POST" onSubmit={handleSubmit}>
+                    
+                    <input type="text" name="firstname" placeholder="First Name" onChange={e => setFirstname(e.target.value)} />
+                    <input type="text" name="lastname" placeholder="Last Name" onChange={e => setLastname(e.target.value)} />
+                    <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
+                    <input type="password" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                 
-                
-                <input type="text" name="firstname" placeholder="First Name" onChange={e => setFirstname(e.target.value)} />
-                <input type="text" name="lastname" placeholder="Last Name" onChange={e => setLastname(e.target.value)} />
-                <input type="text" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                <input type="password" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-               
-                <button type="submit">Submit</button>
-            </form>
-            Already have an account?
-            <a href='/auth/login' className="red">Log In Here</a>
+                    <button type="submit">Submit</button>
+                </form>
+                Already have an account?
+                <a href='/auth/login' className="red">Log In Here</a>
+            </div>
         </div>
-
     )
 }
 

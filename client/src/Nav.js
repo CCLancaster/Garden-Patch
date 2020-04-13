@@ -1,6 +1,6 @@
 // TD: remove Profile link from nav bar and make the logo act as profile (which will redirect to home if no user token found)
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Nav = props => {
   const handleLogout = e => {
@@ -49,9 +49,9 @@ const Nav = props => {
 
   return (
     <div className="navbar">
-        {/* <div className="logobox">
-            <a href="/"><img src="" className="logo" alt='logo'/></a>
-        </div> */}
+        <div>
+            <a href="/"><img src="/Users/monty/SEI29/unit4/p4/garden-patch/client/public/garden_patch_logo.png" className="logo" alt="logo" /></a>
+        </div>
         <div className="links">
             <ul>
             {links}
