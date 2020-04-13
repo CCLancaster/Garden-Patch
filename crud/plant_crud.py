@@ -21,7 +21,7 @@ def jprint(obj):
 
 # Index - API Call
 def get_all_plants(name):
-    full_api_url = f'{API_BASE_URL}?q={name}'
+    full_api_url = f'{API_BASE_URL}plants?q={name}'
     result = requests.request('GET', full_api_url, headers=headers).json()
     jprint(result.json())
 
@@ -52,8 +52,9 @@ def create_plant(user_id):
     shade_tol = plant_info.get('main_species', {}).get('growth', {}).get('shade_tolerance')
     drought_tol = plant_info.get('main_species', {}).get('growth', {}).get('drought_tolerance')
     density_max = plant_info.get('main_species', {}).get('growth', {}).get('planting_density_maximum', {}).get('sqm')
+    img = plant_info['images'][0]['url']
     
-    new_plant = Plant(user_id=user_id, name=name or None, s_name=s_name or None, t_id=t_id or None, p_type=p_type or None, style=style or None, water_min=water_min or None, shade_tol=shade_tol or None, drought_tol=drought_tol or None, density_max=density_max or None, size_max=size_max or None)
+    new_plant = Plant(user_id=user_id, name=name or None, s_name=s_name or None, t_id=t_id or None, p_type=p_type or None, style=style or None, water_min=water_min or None, shade_tol=shade_tol or None, drought_tol=drought_tol or None, density_max=density_max or None, size_max=size_max or None, img=img or None)
     db.session.add(new_plant)
     db.session.commit()
     return jsonify(new_plant.as_dict())
@@ -73,6 +74,7 @@ def create_plant(user_id):
 #         plant.drought_tol = drought_tol or plant.drought_tol
 #         plant.density_max = density_max or plant.density_max
 #         plant.size_max = size_max or plant.size_max
+#         plant.img = img or plant.img
 #         return jsonify(plant.as_dict())
 #     else:
 #         raise Exception('No plant at this id {}'.format(id))

@@ -64,9 +64,10 @@ class Plant(db.Model):
     drought_tol = db.Column(db.String)
     density_max = db.Column(db.Float)
     size_max = db.Column(db.Float)
+    img = db.Column(db.String)
 
     def __repr__(self):
-        return f'Plant(id={self.id}, user_id={self.user_id}, name="{self.name}", s_name="{self.s_name}", t_id={self.t_id}, p_type="{self.p_type}", style="{self.style}", water_min={self.water_min}, shade_tol="{self.shade_tol}", drought_tol="{self.drought_tol}", density_max={self.density_max}, size_max={self.size_max})'
+        return f'Plant(id={self.id}, user_id={self.user_id}, name="{self.name}", s_name="{self.s_name}", t_id={self.t_id}, p_type="{self.p_type}", style="{self.style}", water_min={self.water_min}, shade_tol="{self.shade_tol}", drought_tol="{self.drought_tol}", density_max={self.density_max}, size_max={self.size_max}, img={self.img})'
     
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

@@ -63,3 +63,5 @@ function Zone(props) {
 
 
 }
+
+export default Zone;

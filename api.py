@@ -83,11 +83,12 @@ def search_get_post():
     if request.method == 'GET':
         return jsonify(f'You reached the search plants page')
     if request.method == 'POST':
-        return get_all_plants(name)
+        print(**request.json)
+        return get_all_plants(**request.json)
 
 @app.route('/search/plants', methods=['POST'])
 def search_post():
-    get_plant(id)
+    get_plant(**request.json)
     create_plant(user_id)
 
 # QUESTION: 1) CREATE is a POST route...how do I make these two work? 2)Do I need to create a variable to hold all of the information from API call to then use to add to db?

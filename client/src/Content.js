@@ -16,7 +16,7 @@ const Content = props => {
       <Route path="/auth/login" render={
         () => <Login user={props.user} updateUser={props.updateUser} token={props.token} />
       } />
-        <Route path="/auth/signup" render={
+      <Route path="/auth/signup" render={
         () => <Signup user={props.user} updateUser={props.updateUser} token={props.token} />
       } />
       <Route path="/profile" render={
