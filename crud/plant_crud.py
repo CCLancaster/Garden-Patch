@@ -1,5 +1,6 @@
 # TD: Still need rendering of pages to happen for plant/:id, /plants and /search
 import requests
+import json
 from flask import jsonify, redirect
 from models import db, Plant
 from config import access_token
@@ -10,11 +11,19 @@ headers = {
 
 API_BASE_URL = 'https://trefle.io/api/'
 
+plant_info = {}
+
+# to better see what comes back from trefle (found here: https://www.dataquest.io/blog/python-api-tutorial/)
+def jprint(obj):
+    # create a formatted string of the Python JSON object
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
+
 # Index - API Call
 def get_all_plants(name):
     full_api_url = f'{API_BASE_URL}?q={name}'
     result = requests.request('GET', full_api_url, headers=headers).json()
-    # here's where we drill down in our response to get info to iterate through on the front end
+    jprint(result.json())
 
 # Index - DB call
 def get_all_fav_plants(user_id):
@@ -26,15 +35,24 @@ def get_all_fav_plants(user_id):
 
 # Show
 def get_plant(id):
+    global plant_info
     full_api_url = f'{API_BASE_URL}plants/{id}'
     result = requests.request('GET', full_api_url, headers=headers).json()
-    # TD:
-    # here's where we drill down in our response to get data
-    # return render of template for this page
-
+    jprint(result.json())
+    return plant_info.update(result)
 
 # Create (this will add it to the plant db for the specific user)
-def create_plant(user_id, name, s_name, t_id, p_type, style, water_min, shade_tol, drought_tol, density_max, size_max):
+def create_plant(user_id):
+    name = plant_info['common_name']
+    s_name = plant_info['scientific_name']
+    t_id = plant_info['id']
+    p_type = plant_info.get('main_species', {}).get('duration')
+    style = plant_info.get('main_species', {}).get('specifications', {}).get('growth_habit')
+    water_min = plant_info.get('main_species' {}).get('growth', {}).get('precipitation_minimum', {}).get('inches')
+    shade_tol = plant_info.get('main_species', {}).get('growth', {}).get('shade_tolerance')
+    drought_tol = plant_info.get('main_species', {}).get('growth', {}).get('drought_tolerance')
+    density_max = plant_info.get('main_species', {}).get('growth', {}).get('planting_density_maximum', {}).get('sqm')
+    
     new_plant = Plant(user_id=user_id, name=name or None, s_name=s_name or None, t_id=t_id or None, p_type=p_type or None, style=style or None, water_min=water_min or None, shade_tol=shade_tol or None, drought_tol=drought_tol or None, density_max=density_max or None, size_max=size_max or None)
     db.session.add(new_plant)
     db.session.commit()

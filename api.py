@@ -78,14 +78,17 @@ def zone_get_post_put():
 
 
 # @app.route for /search 'GET' <-- to render page | 'POST' <-- trigger api call | 'PUT' <-- add to plants db (will need to double check this as a PUT route is for updating...what if you're creating/adding a plant to the db for the first time?)
-@app.route('/search', methods=['GET', 'POST', 'PUT'])
-def search_get_post_put():
+@app.route('/search', methods=['GET', 'POST'])
+def search_get_post():
     if request.method == 'GET':
         return jsonify(f'You reached the search plants page')
     if request.method == 'POST':
         return get_all_plants(name)
-    if request.method == 'PUT':
-        return create_plant(user_id, name, s_name, t_id, p_type, style, water_min, shade_tol, drought_tol, density_max, size_max)
+
+@app.route('/search/plants', methods=['POST'])
+def search_post():
+    get_plant(id)
+    create_plant(user_id)
 
 # QUESTION: 1) CREATE is a POST route...how do I make these two work? 2)Do I need to create a variable to hold all of the information from API call to then use to add to db?
 

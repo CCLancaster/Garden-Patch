@@ -31,7 +31,7 @@ function Login(props) {
             return;
         }
 
-        // if user signed up successfully
+        // if user logged in successfully
         response.json().then(result => {
             props.updateUser(result.token);
         })
