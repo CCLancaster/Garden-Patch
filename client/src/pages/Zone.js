@@ -21,7 +21,7 @@ function Zone(props) {
         fetch(`${process.env.REACT_APP_SERVER_URL}/zone`, {
             method: 'POST',
             body: JSON.stringify({
-                zone: zipcode
+                zip_code: zipcode
             }),
             headers: {
                 'Content-Type': 'application/json',

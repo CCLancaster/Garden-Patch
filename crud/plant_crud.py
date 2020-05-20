@@ -23,7 +23,8 @@ def jprint(obj):
 def get_all_plants(name):
     full_api_url = f'{API_BASE_URL}plants?q={name}'
     result = requests.request('GET', full_api_url, headers=headers).json()
-    jprint(result.json())
+    print(result)
+    return result
 
 # Index - DB call
 def get_all_fav_plants(user_id):

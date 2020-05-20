@@ -1,10 +1,9 @@
-# TD: Routes = '/', '/profile'
 # TD: Renders = '/zone', '/search', '/plants', '/plants/:id' - see crud pages
 
-from models import app, User
+from models import app, User, Plant
 from flask import jsonify, request, g, render_template, url_for, json
 from crud.user_crud import get_user, create_user, destroy_user, update_user_zone
-from crud.plant_crud import get_all_plants, get_plant, create_plant, destroy_plant
+from crud.plant_crud import get_all_plants, get_all_fav_plants, get_plant, create_plant, destroy_plant
 from crud.zone_crud import get_zone
 from flask_httpauth import HTTPTokenAuth
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
@@ -37,7 +36,7 @@ def verify_token(token):
 
 @app.route('/auth/signup', methods=['POST'])
 def signup():
-    print(**request.json)
+    # print(**request.json)
     return create_user(**request.json)
 
 
@@ -92,7 +91,7 @@ def search_get_post():
         # return jsonify(f'You reached the search plants page')
         return render_template('Search.js')
     if request.method == 'POST':
-        print(**request.json)
+        # print(**request.json)
         return get_all_plants(**request.json)
 
 # @app.route /search/plants 'POST' <-- triggers second API all and saves plant to DB
