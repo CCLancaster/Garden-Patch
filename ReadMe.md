@@ -29,3 +29,5 @@ The purpose of this web app is to allow the user to do the following:
 
 
 Note: After getting through items 1-4, I found out that the Farmer's Almanac has already created the ideal form of what I wanted out of this web app - check out the possibilities [here](https://gardenplanner.almanac.com/). It is crazy amazing and I hope to figure out how they coded it!
+
+![An example of utilizing the Farmer's Almanac Garden Planner](https://github.com/CCLancaster/Garden-Patch/blob/master/client/public/Year%20One%20Garden%20Plan.pdf)
